@@ -2,13 +2,13 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'https://some-domain.com/api/',
+    baseURL: 'https://fakestoreapi.com',
     timeout: 1000
 });
 
 export async function getStoreProducts() {
     try {
-        const response = await axios.get('https://fakestoreapi.com/products');
+        const response = await instance.get('/products');
         return response.data;
     } catch (error) {
         console.log('An error has obtaining data', error);
@@ -17,7 +17,7 @@ export async function getStoreProducts() {
 
 export async function getStoreProductsByID(id) {
     try {
-        const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
+        const response = await instance.get(`/products/${id}`);
         return response.data;
     } catch (error) {
         console.log('An error has obtaining data', error);
@@ -26,7 +26,7 @@ export async function getStoreProductsByID(id) {
 
 export async function getCartByID(id) {
     try {
-        const { data } = await axios.get(`https://fakestoreapi.com/carts/${id}`);
+        const { data } = await instance.get(`/carts/${id}`);
         const { products } = data;
 
         const productsWithData = await Promise.all(
